@@ -1,0 +1,126 @@
+/* Basically same as login css, but just changed to register */
+.register-container {
+  min-height: 100vh;
+  /* Makin items in the center with flex */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 20px 10px;
+  margin: 0;
+}
+
+.register-box {
+  background: white;
+  padding: 25px 40px 10px;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  transform: translateY(20px);
+}
+
+/* Main heading */
+.register-box h2 {
+  margin-bottom: 12px;
+  color: var(--primary-green);
+  font-weight: 600;
+  font-size: 28px;
+  letter-spacing: -0.5px;
+}
+
+.register-box .subtitle {
+  color: #555;
+  font-size: 15px;
+  margin-bottom: 28px;
+  font-style: normal;
+  line-height: 1.5;
+}
+
+.register-box .form-control {
+  border: 1.5px solid #d0e8d0;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 15px;
+  /* Makes the transition feel smooth */
+  transition: all 0.3s ease;
+  box-shadow: none;
+  background-color: #fff;
+  width:90%;
+}
+
+/* Making it feel interactive, by changing border color when user is typing in that input */
+.register-box .form-control:focus {
+  border-color: #3a9c43;
+  outline: 0;
+}
+
+.register-box label {
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 6px;
+  display: block;
+  text-align: left;
+}
+
+/* Register button */
+.register-box button {
+  position: relative;
+  background-color: #3a9c43;
+  color: white;
+  border: none;
+  padding: 12px 0;
+  border-radius: 8px;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(58, 156, 67, 0.2);
+}
+
+/* Making it feel interactive */
+.register-box button:hover {
+  background-color: #2e7d32;
+  transform: translateY(-1px);
+}
+
+/* Already have an account link */
+.register-box a {
+  display: block;
+  margin-top: 1.5rem;
+  color: #2e7d32;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* Making it feel interactive */
+.register-box a:hover {
+  text-decoration: underline;
+  color: #1b5e20;
+}
+
+.form-fields-left {
+  text-align: left;
+  margin: 0 auto 1.5rem auto;
+}
+
+/* Remove bullet points */
+small ul{
+    list-style: none;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .register-box {
+    padding: 35px 30px;
+    border-radius: 16px;
+  }
+
+  .register-box h2 {
+    font-size: 26px;
+  }
+
+}

@@ -1,0 +1,37 @@
+<!-- Abstraction/Inheritance, from the base.html, allowing for navigation bars -->
+{% extends 'tracker/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block head %}
+    <!-- Custom title and CSS-->
+    <title>Tracker</title>
+    <link rel="stylesheet" href="{% static 'css/tracker.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="plant-form-container">
+    <h1>Track Plant Health</h1>
+    <!-- Actual form -->
+    <form method="post" enctype="multipart/form-data" class="plant-health-form">
+        {% csrf_token %}
+        <div class="form-fields">
+            <!-- Form rendered by Django -->
+            {{ form|crispy }}
+        </div>
+        
+        <!-- Creation of radio button, giving my clients a choice -->
+        <div class="radio-group">
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="checkbox" name="image_purpose" value="identify" checked>
+                    <span class="radio-custom"></span>
+                    Use this image for health assessment
+                </label>
+            </div>
+        </div>
+        
+        <button type="submit" class="submit-btn">Save</button>
+    </form>
+</div>
+{% endblock %}

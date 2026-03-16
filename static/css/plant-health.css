@@ -1,0 +1,181 @@
+:root {
+    /* Defining colors */
+    --primary: #2e7d32;
+    --primary-dark: #1b5e20;
+    --secondary: #81c784;
+    --background: #f8fff8;
+    --light: #f5f5f5;
+    --dark: #333;
+    --gray: #e0e0e0;
+    --white:#f9f9f9;
+    --dark-transparent:rgba(0, 0, 0, 0.1);
+}
+
+.plant-health-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    /* Having backup fonts in case some fonts don't work */
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+}
+
+.plant-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    background: #2d5016;
+    color: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px var(--dark-transparent);
+}
+
+.plant-header h1 {
+    margin: 0 0 0.5rem 0;
+    font-size: 2rem;
+}
+
+/* When the plant was added date */
+.log-date {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin: 0;
+}
+
+.health-card {
+    background: var(--background);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border: 2px solid #e8f5e9;
+}
+
+.plant-image-section {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+/* Sizing the image, cropping if necessary, like not fit aspect ratio */
+.plant-image {
+    max-width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 3px solid #4caf50;
+}
+
+.plant-details {
+    display: grid;
+    gap: 1rem;
+}
+
+.detail-item {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: white;
+    border-radius: 8px;
+    border-left: 4px solid #4caf50;
+}
+
+.detail-label {
+    font-weight: bold;
+    color: #2e7d32;
+    min-width: 120px;
+}
+
+.detail-value {
+    color: #333;
+}
+
+.disease-card {
+    background: var(--background);
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px var(--dark-transparent);
+}
+
+/* Disease text */
+.disease-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Creation of small awareness badegs */
+.disease-header h2 {
+    margin: 0;
+    color: #d32f2f;
+}
+
+.probability-badge {
+    background: #ffcdd2;
+    color: #c62828;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+/* Section for treatements, diseases, making it into individual blocks */
+.disease-section {
+    margin-bottom: 1.5rem;
+}
+
+.disease-section h3 {
+    color: #2e7d32;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.disease-section p {
+    line-height: 1.6;
+    color: #555;
+    margin: 0;
+    padding: 0.75rem;
+    background: white;
+    border-radius: 8px;
+    border-left: 4px solid #4caf50;
+}
+
+
+/* Learn more link */
+.learn-more-link {
+    display: inline-block;
+    background: #4caf50;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: 2px solid #4caf50;
+}
+
+/* Making it interactive */
+.learn-more-link:hover {
+    background: transparent;
+    color: #4caf50;
+    transform: translateY(-2px);
+}
+
+/* Creation of box of when there is no health assesment, or when no disease detected */
+.healthy-plant {
+    text-align: center;
+    padding: 2rem;
+    border-radius: 15px;
+    color: #2e7d32;
+    border: 2px solid #c8e6c9;
+}
+
+.healthy-plant h2 {
+    margin: 0 0 1rem 0;
+    font-size: 1.8rem;
+}
+
+

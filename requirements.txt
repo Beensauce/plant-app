@@ -1,0 +1,6 @@
+crispy-bootstrap4==2025.6
+Django==5.2.1
+django-crispy-forms==2.4
+kindwise-api-client==0.6.0
+pillow==11.0.0
+python-decouple==3.8

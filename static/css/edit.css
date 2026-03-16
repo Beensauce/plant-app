@@ -1,0 +1,14 @@
+/* Centering elements, and make them side to side */
+#container{
+    display: flex;
+    flex-direction:row;
+    gap:3rem;
+    align-items: center;
+}
+
+.container{
+    width:40%;
+    height:100vh;
+    margin:auto;
+    margin-top:3%;
+}

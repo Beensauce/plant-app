@@ -1,0 +1,172 @@
+<!-- Abstraction/Inheritance, from the base.html, allowing for navigation bars -->
+{% extends 'tracker/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block head %}
+    <!-- Custom title and CSS-->
+    <title>Plant Dashboard - {{ plant.nickname|default:plant.common_name }}</title>
+    <link rel="stylesheet" href="{% static 'css/plant-detail.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block content %}    
+    <!-- Checking if the plant has did a health assesment -->
+    {% if plant.api_plant_id %}
+        <div class="container">
+            <div class="plant-header">
+                <img src="{{ plant.thumbnail.url }}" alt="{{ plant.nickname|default:plant.common_name }}">
+                <div>
+                    <h2>{{ plant.nickname|default:plant.common_name }}</h2>
+                    <p>Plant Information</p>
+                </div>
+            </div>
+            <div class="plant-info">
+                <h3>Description</h3>
+                <p class="info-item" style="grid-column: span 2;">{{ plant.plant_description }}</p>
+                <p class="info-item"><span class="info-label">Watering:</span>{{ plant.care_watering }}</p>
+                <p class="info-item"><span class="info-label">Light:</span>{{ plant.care_light }}</p>
+                <p class="info-item"><span class="info-label">Soil:</span>{{ plant.care_soil }}</p>
+                <p class="info-item"><span class="info-label">Toxicity:</span>{{ plant.toxicity_info }}</p>
+            </div>
+
+    <!-- When no health logs are available -->
+    {% else %}
+        <p>No detailed information available for this plant.</p>
+    {% endif %}
+        <div class="tracker-container">
+            <h3 class="tracker-tag">Plant Growth Tracker</h3>
+
+            {% if health_logs %}
+                <div class="tracker">
+                    <div id="health-entries">
+                        {% for health in health_logs %}
+                        <!-- Looping through to make individual health assesment tabs -->
+                        <a href="{% url 'health-assesment' pk=health.id %}">
+                            <div class="track-entries">
+                                    <div class="track-entry">
+                                        <!-- Checking if there is images from the health assesment -->
+                                        {% if health.image %}
+                                            <img src="{{ health.image.url }}" alt="{{ plant.nickname }} in action">
+                                        {% else %}
+                                            <img src="{% static 'Pictures/Spike.png' %}" alt="Default plant image">
+                                        {% endif %}
+                                            <div class="track-entry-details">
+                                                <strong>{{ health.log_date }}</strong>
+                                                <p class="height">{{ health.height }}cm</p>
+                                                <p>{{ health.observation }}</p>
+                                                <a href="{% url 'delete_track' pk=health.id %}" class="delete-button">Delete track</a>
+                                            </div>
+                                    </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                    <!-- Creation of graph element -->
+                    <div id="graph-container">
+                        <h3>Plant growth graph :D</h3>
+                        <canvas id="myChart"></canvas>
+                    <script>
+                        function createGrowthChart(dates, heights){
+                            const ctx = document.getElementById('myChart');
+                            new Chart(ctx, {
+                                    type: 'line',
+                                    data: {
+                                        labels: dates,
+                                        datasets: [{
+                                            label: 'Height of the plant',
+                                            data: heights,
+                                            borderColor: '#228B22',
+                                            backgroundColor: 'rgba(34, 139, 34, 0.1)',
+                                            borderWidth: 3,
+                                            pointBackgroundColor: '#006400',
+                                            pointBorderColor: '#fff',
+                                            pointBorderWidth: 2,
+                                            pointRadius: 6,
+                                            pointHoverRadius: 8,
+                                            fill: true,
+                                        }]
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        plugins: {
+                                            title: {
+                                                display: true,
+                                                text: 'Growth Graph',
+                                                font: {
+                                                    size: 18,
+                                                    family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                                                },
+                                                color: '#228B22'
+                                            },
+                                            legend: {
+                                                labels: {
+                                                    font: {
+                                                        size: 14,
+                                                        family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                                                    },
+                                                    color: '#333'
+                                                }
+                                            }
+                                        },
+                                        scales: {
+                                            y: {
+                                                beginAtZero: true,
+                                                title: {
+                                                    display: true,
+                                                    text: 'Height (cm)',
+                                                    color: '#228B22',
+                                                    font: {
+                                                        size: 14,
+                                                        weight: 'bold'
+                                                    }
+                                                },
+                                                grid: {
+                                                    color: 'rgba(144, 238, 144, 0.3)'
+                                                },
+                                                ticks: {
+                                                    color: '#333',
+                                                    font: {
+                                                        family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                                                    }
+                                                }
+                                            },
+                                            x: {
+                                                title: {
+                                                    display: true,
+                                                    text: 'Time',
+                                                    color: '#228B22',
+                                                    font: {
+                                                        size: 14,
+                                                        weight: 'bold'
+                                                    }
+                                                },
+                                                ticks: {
+                                                    color: '#333',
+                                                    font: {
+                                                        family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                                                    },
+                                                    maxRotation: 45,
+                                                    minRotation: 45
+                                                }
+                                            }
+                                        },
+                                    }
+                                });
+                            }
+                            // Gathering data from server and parsing them to be viewable, and actually creating the chart
+                            const heights = JSON.parse("{{ chart_heights|escapejs }}")
+                            const dates = JSON.parse("{{ chart_dates|escapejs }}")
+                            createGrowthChart(dates, heights);
+                    </script>
+                    </div>
+                {% else %}
+                <!-- When there are no health logs available -->
+                    <h2>No health logs yet, add one to get started</h2>    
+                {% endif %}
+            </div>
+        </div>
+    </div>
+<!-- Chart.JS external library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+{% endblock %}

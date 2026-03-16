@@ -1,0 +1,146 @@
+/* Login box */
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 80px 20px 40px;
+  margin: 0;
+}
+
+.login-box {
+  background: white;
+  padding: 45px 40px;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+  width: 100%;
+  max-width: 25rem;
+  text-align: center;
+}
+
+.login-box h2 {
+  margin-bottom: 1rem;
+  color: #2c662d;
+  font-weight: 600;
+  font-size: 28px;
+}
+
+.subtitle {
+  color: #555;
+  font-size: 1rem;
+  margin-bottom: 28px;
+}
+
+.login-box .form-control {
+  border: 1.5px solid #d0e8d0;
+  border-radius: 8px;
+  padding: 1rem 1.1rem;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  box-shadow: none;
+  background-color: #fff;
+}
+
+/* When the text input is clicked (in focused) So it feels more interactive*/
+.login-box .form-control:focus {
+  border-color: #3a9c43;
+  width: 90%;
+}
+
+.login-box label {
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 6px;
+  display: block;
+  text-align: left;
+}
+
+.login-box button {
+  position: relative;
+  overflow: hidden;
+  background-color: #3a9c43;
+  color: white;
+  border: none;
+  padding: 12px 0;
+  border-radius: 8px;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(58, 156, 67, 0.2);
+}
+
+/* When the text input is clicked (in focused) So it feels more interactive*/
+.login-box button:hover {
+  background-color: #2e7d32;
+  transform: translateY(-1px);
+}
+
+/* Forgot password */
+.login-box a {
+  display: block;
+  margin-top: 18px;
+  color: #2e7d32;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.login-box a:hover {
+  text-decoration: underline;
+  color: #1b5e20;
+}
+
+.form-fields-left {
+  text-align: left;
+  margin: 0 auto 20px auto;
+}
+
+.form-fields-left {
+  text-align: left;
+  margin: 0 auto 2rem auto;
+  max-width: 100%;
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 2rem;
+}
+
+.login-box button {
+  position: relative;
+  overflow: hidden;
+  background-color: #3a9c43;
+  color: white;
+  border: none;
+  padding: 1rem 0;
+  border-radius: 8px;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(58, 156, 67, 0.2);
+}
+
+/* Interactive hover */
+.login-box button:hover {
+  background-color: #2e7d32;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(58, 156, 67, 0.3);
+}
+
+
+/* Responsive, changes items when width is smaller than 480 */
+@media (max-width: 480px) {
+  .login-box {
+    padding: 35px 30px;
+    border-radius: 16px;
+  }
+
+  .login-box h2 {
+    font-size: 26px;
+  }
+
+}

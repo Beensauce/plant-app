@@ -1,0 +1,91 @@
+<!-- Loading django things so can use if statements and load images from static folder -->
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- HTML must haves to ensure a smooth user interface between different devices -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Block for other templates -->
+    {% block head %} {% endblock %}
+
+    <!-- Icons, CSS and JS loading -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'Pictures/favicon_io/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'Pictures/favicon_io/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'Pictures/favicon_io/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'Pictures/favicon_io/site.webmanifest' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    <script src="{% static 'js/base.js' %}" defer></script>
+
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+  <nav>
+    <!-- Only for mobile views -->
+    <ul class="sidebar">
+      <li id="close"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26"><path d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z"/></svg></a></li>
+      {% if user.is_authenticated %} <!-- Displays different navigation elements depending on whether the user is logged in or not-->
+        <li><a href="{% url 'plants' %}">All plants</a></li>
+        <li><a href="{% url 'tracker' %}">Tracker</a></li>
+      {% else %}
+        <li><a href="{% url 'main' %}">Home</a></li>
+      {% endif %}
+      
+      {% if user.is_authenticated %}
+      <li>
+        <form action="{% url 'logout' %}" method="POST" class="logout-form">
+          <!-- Secure token, must work for Django forms -->
+          {% csrf_token %} 
+          <button type="submit" class="sidebar-link">logout</button>
+        </form>
+      </li>
+      {% else %}
+        <li><a href="{% url 'login' %}">Login</a></li>
+        <li><a href="{% url 'register' %}">Sign up</a></li>
+      {% endif %}
+    </ul>
+
+    <!-- Only for computer view -->
+    <ul>
+      <li>
+        <a href="{% url 'main' %}" class="logo-link">
+          <img src="{% static 'Pictures/Spike.png' %}" alt="Spike Logo" class="nav-logo">
+          <span>Spike</span>
+        </a>
+      </li>
+      {% if user.is_authenticated %}
+        <li class="hideOnMobile"><a href="{% url 'plants' %}">All plants</a></li>
+        <li class="hideOnMobile"><a href="{% url 'tracker' %}">Tracker</a></li>
+      {% else %}
+        <li class="hideOnMobile"><a href="{% url 'main' %}">Home</a></li>
+      {% endif %}
+
+      {% if user.is_authenticated %}
+      <li class="hideOnMobile">
+        <form action="{% url 'logout' %}" method="POST" class="logout-form">
+          {% csrf_token %}
+          <button type="submit" class="sidebar-link">logout</button>
+        </form>
+      </li>
+      {% else %}
+        <li class="hideOnMobile" ><a href="{% url 'login' %}">Login</a></li>
+        <li class="hideOnMobile"><a href="{% url 'register' %}">Sign up</a></li>
+      {% endif %}
+      <li class="menu-button" id="menu"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26"><path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z"/></svg></a></li>
+    </ul>
+  </nav>
+    <!-- Messages -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show" style="background-color: #d4edda; border-color: #c3e6cb; padding: 10px; border-radius: 5px; margin-bottom: 20px; position: relative;">
+                {{ message }}
+                <!-- Button for closing the message -->
+                <button type="button" class="close" onclick="this.parentElement.remove()" style="position: absolute; top: 5px; right: 10px; background: none; border: none; font-size: 1.2em;">&times;</button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+    {% block content %} {% endblock %}
+  </body>
+</html>

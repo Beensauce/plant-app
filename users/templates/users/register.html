@@ -1,0 +1,28 @@
+{% extends 'tracker/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="register-container">
+  <div class="register-box">
+    <h2>Create Account</h2>
+    <p class="subtitle">Sign up to start caring for your plants ;D</p>
+    
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-fields-left">
+        {{ form|crispy }}
+      </div>  
+      <button type="submit">Register</button>
+    </form>
+    
+    <p class="subtitle" style="margin-top: 20px;">
+      <a href="{% url 'login' %}">Already have an account? Log in here</a>
+    </p>
+  </div>
+</div>
+{% endblock %}

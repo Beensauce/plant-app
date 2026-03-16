@@ -1,0 +1,47 @@
+<!-- Abstraction/Inheritance, from the base.html, allowing for navigation bars -->
+{% extends 'tracker/base.html' %}
+{% load static %}
+{% block head %}
+<!-- Having custom title, and CSS links -->
+    <title>Edit {{ plant.nickname|default:plant.common_name }}</title>
+    <link rel="stylesheet" href="{% static 'css/edit.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2>Edit Plant Information</h2>
+        
+        <div id="container">
+            <!-- Current plant info -->
+            <div>
+                <h3>Plant Details</h3>
+                <div>
+                    <p><strong>Nickname:</strong> {{ plant.nickname|default:"None" }}</p>
+                    <p><strong>Common Name:</strong> {{ plant.common_name }}</p>
+                    {% if plant.thumbnail %}
+                        <div>
+                            <img src="{{ plant.thumbnail.url }}" >
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Update form -->
+            <div class="form"> 
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <h3>Update Information</h3>
+                    <div>
+                        {{ form.as_p }}
+                    </div>
+                    
+                    <div>
+                        <button type="submit">Save Changes</button>
+                        <a href="{% url 'plants' %}">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

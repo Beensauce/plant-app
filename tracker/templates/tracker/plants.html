@@ -1,0 +1,89 @@
+<!-- Abstraction/Inheritance, from the base.html, allowing for navigation bars -->
+{% extends 'tracker/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block head %}
+    <!-- Custom title and CSS JS-->
+    <title>All plants</title>
+    <link rel="stylesheet" href="{% static 'css/plants.css' %}">
+    <script src="{% static 'js/plants.js' %}" defer></script>
+{% endblock %}
+
+{% block content %}
+
+<h1 style="padding:2%">My Plants</h1>
+    <ul class="plant-list">
+        <!-- Loop through all plants that the user has with a for loop, creating individual card elements each time -->
+        {% for plant in plants %}
+
+            <!-- Individual plant cards -->
+            <li class="plant-card">
+                <div class="plant-header">
+                    <h3>{{ plant.nickname }}</h3>
+                    <ul> 
+                        <!-- URLS to edit and view more infor about plant. Passing plant.id as an argument, so will know which plant to edit -->
+                        <a href="{% url 'edit-plant' plant_id=plant.id %}" title="Edit this plant info"><img class='feature-icon' src="{% static 'pictures/edit.png' %}"></a>
+                        <a href="{% url 'plant-detail' plant_id=plant.id %}" title="Info about this plant"><img class='feature-icon' src="{% static 'pictures/info.png' %}"></a>
+                    </ul>
+                </div>
+                <p><strong>Type:</strong> {{ plant.common_name }}</p>
+                <div class="pic-container">
+                <!-- Checking if user has uploaded an image for his plant -->
+                    {% if plant.thumbnail %}
+                        <img class='plant-image' src='{{ plant.thumbnail.url }}' alt="{{ plant.nickname }}">
+                    {% else %}
+                        <p>No image available</p>
+                    {% endif %}
+                </div>
+                <p><strong>Added:</strong> {{ plant.date_added|date:"M d, Y" }}</p>
+                <p><strong>Last watered:</strong> {{ plant.last_watered|timesince }} ago</p>
+
+                <a class="track-health" href="{% url 'tracker_with_id' plant_id=plant.id %}">📊 Track Health</a>
+
+                <form action="{% url 'water_plant' plant_id=plant.id %}" method="post" style="display:inline;">
+                    <!-- Form from Django -->
+                    {% csrf_token %}
+                    <button type="submit" onclick="return confirm('Water this plant now?')">💧 Water Now</button>
+                </form>
+
+                <a href="{% url 'delete_plant' pk=plant.id %}">Delete Plant</a>
+            </li>
+        <!-- When there isn't anything passed through the context, in thi case plants -->
+        {% empty %}
+            <p>You haven't added any plants yet.</p>
+        {% endfor %}
+    </ul>
+
+    <!-- Button to trigger to show plant modal overlay -->
+    <button id="add-plant-btn">Add New Plant</button>
+
+    <!-- Add plant Overlay -->
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" id="close-modal">&times;</span>
+            <h2>Add a New Plant</h2>
+            <form method="post" enctype="multipart/form-data">
+                <!-- Form from Django -->
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="form-group">
+                    <label>How would you like to use this image?</label>
+                    <div>
+                        <label>
+                            <input type="radio" name="image_purpose" value="identify" checked>
+                            Use this image to identify the plant
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <input type="radio" name="image_purpose" value="display">
+                            Just use this as a background picture
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success">Save Plant</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

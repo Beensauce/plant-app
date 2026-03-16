@@ -1,0 +1,21 @@
+<!-- Abstraction/Inheritance, from the base.html, allowing for navigation bars -->
+{% extends 'tracker/base.html' %}
+<!-- Custom title -->
+{% block head %}
+    <title>Confirm delete?</title>
+{% endblock %}
+{% block content %}
+<div>
+    <h2>Confirm Deletion</h2>
+    <p>Are you sure you want to delete the plant "{{ object.nickname }}"?</p>
+    <p>This action cannot be undone.</p>
+    
+    <!-- Form to delete plant -->
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, Delete</button>
+        <a href="{% url 'plants' %}">Cancel</a>
+    </form>
+</div>
+{% endblock %}
+

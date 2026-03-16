@@ -1,0 +1,122 @@
+<!-- Abstraction/Inheritance, from the base.html, allowing for navigation bars -->
+{% extends 'tracker/base.html' %}
+{% load static %}
+
+{% block head %}
+    <!-- Having custom title, and CSS links -->
+    <title>Plant Health Assessment</title>
+    <link rel="stylesheet" href="{% static 'css/plant-health.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="plant-health-container">
+    <div class="plant-header">
+        <!-- Health report information -->
+        <h1>{{ assesment.plant_id.plant_name }} Health Report</h1>
+        <p class="log-date">Logged on {{ assesment.log_date|date:"F d, Y" }}</p>
+    </div>
+
+    <div class="health-card">
+        <div class="plant-image-section">
+            <img src="{{ assesment.image.url }}" alt="Plant health image" class="plant-image">
+        </div>
+
+        <div class="plant-details">
+            <div class="detail-item">
+                <span class="detail-label">Height:</span>
+                <!-- Depending on if client included a height into their report -->
+                <span class="detail-value">{{ assesment.height|default:"Not recorded" }} cm</span>
+            </div>
+            
+            <!-- Checking if client added extra observation text -->
+            {% if assesment.observation %}
+            <div class="detail-item">
+                <span class="detail-label">Observation:</span>
+                <span class="detail-value">{{ assesment.observation }}</span>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Checking boolean value if there is a health assesment -->
+    {% if assesment.checked %}
+        {% if assesment.disease_detected %}
+
+        <!-- All these data from API, then saved into the database -->
+        <div class="disease-card">
+            <div class="disease-header">
+                <h2>Disease Detected: {{ assesment.disease_detected }}</h2>
+                {% if assesment.disease_probability %}
+                    <div class="probability-badge">
+                        Probability: {{ assesment.disease_probability|floatformat:1 }}%
+                    </div>
+                {% endif %}
+            </div>
+            
+            <!-- If statements to check if the API has an answer or not -->
+            <!-- Disease description -->
+            {% if assesment.disease_description %}
+                <div class="disease-section">
+                    <h3>Description</h3>
+                    <p>{{ assesment.disease_description }}</p>
+                </div>
+            {% endif %}
+
+            <!-- Potential causes -->
+            {% if assesment.disease_cause  != "We don't know" %}
+                <div class="disease-section">
+                    <h3>Cause</h3>
+                    <p>{{ assesment.disease_cause }}</p>
+                </div>
+            {% endif %}
+
+            <!-- Potential biological treatements -->
+            {% if assesment.disease_treatment_biological %}
+                <div class="disease-section">
+                    <h3>Biological Treatment</h3>
+                    <p>{{ assesment.disease_treatment_biological }}</p>
+                </div>
+            {% endif %}
+
+            <!-- Potential chemical treatements -->
+            {% if assesment.disease_treatment_chemical %}
+                <div class="disease-section">
+                    <h3>Chemical Treatment</h3>
+                    <p>{{ assesment.disease_treatment_chemical }}</p>
+                </div>
+            {% endif %}
+
+            <!-- Potential preventions -->
+            {% if assesment.disease_treatment_prevention %}
+                <div class="disease-section">
+                    <h3>Prevention</h3>
+                    <p>{{ assesment.disease_treatment_prevention }}</p>
+                </div>
+            {% endif %}
+
+            <!-- Link to URL -->
+            {% if assesment.disease_url %}
+                <div class="disease-section">
+                    <a href="{{ assesment.disease_url }}" target="_blank" class="learn-more-link">
+                        Learn more about this disease →
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- What happens when Kindwise API didn't detect an error with the plants -->
+        {% else %}
+            <div class="healthy-plant">
+                <h2>Your plant appears healthy!</h2>
+                <p>No diseases detected in this assessment.</p>
+            </div>
+        {% endif %}
+    <!-- When the user didn't do a health assesment, boolean value set to false -->
+    {% else %}
+        <div class="healthy-plant">
+            <h2>You didn't do a health assement</h2>
+            <p>Try one to get a report</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

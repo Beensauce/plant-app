@@ -1,0 +1,131 @@
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.plant-header {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    border-bottom: 2px solid #e6f2e6;
+    padding-bottom: 1.5rem;
+}
+
+/* Making the image fit a small place, might crop to make it fit with object-fit: cover */
+.plant-header img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 4px solid var(--leaf-green);
+}
+.plant-header h2 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+/* Creation of grid system, for 4 textual places */
+.plant-info {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+.plant-info h3 {
+    color: var(--dark-green);
+    border-bottom: 1px solid var(--thin-green);
+    padding-bottom: 0.5rem;
+    grid-column: span 2;
+}
+.info-item {
+    background-color: white;
+    padding: 0.8rem;
+    border-radius: 8px;
+    border-left: 5px solid var(--leaf-green);
+    line-height: 1.4;
+}
+.info-label {
+    font-weight: bold;
+    color: var(--primary-green);
+    display: block;
+    margin-bottom: 0.3rem;
+}
+.tracker-container{
+    margin-top: 2rem;
+}
+
+/* Make 2 elements side by side */
+.tracker {
+    display: flex;
+    gap: 2rem;
+}
+.tracker-container h3{
+    color: var(--dark-green);
+    padding-top: 0.5rem;
+    margin-top: 1rem;
+}
+.tracker-tag{
+    border-bottom: 1px solid var(--thin-green);
+}
+.track-entries {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.track-entry {
+    display: flex;
+    gap: 1rem;
+    background-color: white;
+    border-radius: 8px;
+    padding: 0.8rem;
+    border-left: 5px solid var(--leaf-green);
+    align-items: flex-start;
+}
+
+/* Make each image have rounded borders, and have specific height and width, cropping if necessary */
+.track-entry img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.track-entry-details {
+    flex: 1;
+}
+.height{
+ color:var(--primary-green)   
+}
+
+/* Adjusting width of trackings and width of the graph */
+#health-entries{
+    width:35%;
+}
+#graph-container{
+    width:65%;
+}
+
+/* Deleting plant track buttons, a red look */
+.delete-button {
+    background: #ffcdd2;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
+    display: block;
+    margin: 4px 4px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.delete-button:hover {
+    background: #f44336;
+    color: white;
+}
+
+a{
+    text-decoration: none;
+}

@@ -1,0 +1,79 @@
+<!-- Abstraction/Inheritance, from the base.html, allowing for navigation bars -->
+{% extends 'tracker/base.html' %}
+{% load static %}
+{% block head %}
+    <!-- Custom title and CSS-->
+    <title>Spike</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+{% endblock %}
+{% block content %}       
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="overlay"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Track Your Plant's Health with Spike</h1>
+                    <p>Spike helps you monitor your plants' well-being with the tracker form. Image uploads get instant health assessments, care recommendations, and growth tracking.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Powerful Plant Care Features</h2>
+                <p>Everything you need to keep your plants healthy and thriving</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Image Recognition</h3>
+                    <p>Simply snap a photo of your plant to get instant plant identification</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Health tracking</h3>
+                    <p>Track your plant's health over time with a single image upload, outlining the disease and how to treat</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Care Recommendations</h3>
+                    <p>Receive personalized watering, lighting advice based on your plant's specific needs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li>daabob2.0@gmail.com</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Images, logos used</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://www.flaticon.com/free-icons/camera" title="camera icons">Camera icons created by Ilham Fitrotul Hayat - Flaticon</a></li>
+                        <li><a href="https://www.flaticon.com/free-icons/heart" title="heart icons">Heart icons created by Freepik - Flaticon</a></li>
+                        <li><a href="https://www.flaticon.com/free-icons/leaf" title="leaf icons">Leaf icons created by Pixel perfect - Flaticon</a></li>
+                        <li><a href="https://www.flaticon.com/free-icons/edit" title="edit icons">Edit icons created by Kiranshastry - Flaticon</a></li>
+                        <li><a href="https://www.flaticon.com/free-icons/card" title="card icons">Card icons created by Pixel perfect - Flaticon</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    
+    <!-- CSS for adding background image -->
+    <style>
+        .hero {
+            position: relative;
+            background: url("{% static 'Pictures/Spike background.jpg' %}") no-repeat center;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            height:100vh;
+        }
+    </style>
+{% endblock %}  

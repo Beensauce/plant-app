@@ -1,0 +1,151 @@
+:root {
+  /* Defining colors */
+    --primary-green: #2e7d32;
+    --light-green: #4caf50;
+    --thin-green:#cce3cc;
+    --dark-green: #1b5e20;
+    --soil-brown: #5d4037;
+    --leaf-green: #81c784;
+    --pot-beige: #d7ccc8;
+    --text-dark: #333;
+    --text-light: #f5f5f5;
+}
+
+*{
+  /* Set default margins and padding to0 */
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: rgb(240, 247, 241);
+
+/* Nav bar style */
+}
+nav{
+  display: sticky;
+  z-index: 999;
+  background-color: rgb(237, 237, 237);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+}
+nav ul{
+  width: 100%;
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+nav li{
+  height: 50px;
+}
+
+nav a{
+  height: 100%;
+  padding: 0 30px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  color: black;
+}
+
+/* Hover effect of Nav bar to make it feel more juicy */
+nav a:hover{
+  background-color: rgb(194, 194, 194);
+}
+nav .logo-link:hover {
+    background-color: transparent;
+}
+/* Make first child (logo) to the left */
+nav li:first-child{
+  margin-right: auto;
+}
+
+/* Mobile view nav bar */
+.sidebar{
+  position: fixed;
+  top: 0; 
+  right: 0;
+  height: 100vh;
+  width: 250px;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  box-shadow: -10px 0 10px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  z-index: 999;
+}
+.sidebar li{
+  width: 100%;
+}
+.sidebar a{
+  width: 100%;
+}
+.menu-button{
+  display: none;
+}
+
+/* Logo styles */
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-logo {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+nav li:first-child {
+  margin-right: auto;
+  height: auto; 
+}
+
+nav li:first-child a {
+  padding: 0 20px;
+}
+
+.logout-form {
+  width: 100%;
+  height: 100%;
+}
+
+.sidebar-link {
+  height: 100%;
+  width: 100%;
+  padding: 0 30px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  color: black;
+  background: none;
+  border: none;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.sidebar-link:hover {
+  background-color: #f0f0f0;
+}
+
+/* Responsivity on mobile */
+@media(max-width: 800px){
+  .hideOnMobile{
+    display: none;
+  }
+  .menu-button{
+    display: block;
+  }
+}
+@media(max-width: 400px){
+  .sidebar{
+    width: 100%;
+  }
+}

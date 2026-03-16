@@ -1,0 +1,29 @@
+FUNCTION addHealthLog(request, plant_id)
+    IF request method == "POST": 
+    -- Checking if data is sent to server
+
+    IF form.isValid()
+        IMAGE_PURPOSE = request.get('image_purpose')
+
+        IF IMAGE_PURPOSE == "identify"
+            TRY:
+                Save user input
+                Call Kindwise API health assesesment and send image
+
+                IF API returns disease:
+                    Save data into database
+                
+                ELSE:
+                    OUTPUT "No issues found"
+            
+            CATCH ANY API ERRORS:
+                OUTPUT "ERROR" + Error message
+                REDIRECT plant detail page
+        
+        ELSE -- Don't want to identify plant
+            Save user input
+            REDIRECT plant detail page
+    
+    ELSE -- Sends GET request to server
+        OUTPUT "Error has occured, Plant not found or you don't have permission to access it."
+        REDIRECT plant list view
